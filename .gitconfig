@@ -1,0 +1,17 @@
+[user]
+	name = Alex Krantz
+	email = alex@krantz.dev
+	signingkey = 82E241A05A146B4C
+[commit]
+	gpgsign = true
+[credential]
+	helper = store
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[diff]
+	ignoreSubmodules = dirty
+[core]
+	quotepath = false

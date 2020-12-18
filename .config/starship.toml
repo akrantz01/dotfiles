@@ -1,0 +1,38 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$docker_context\
+$cmake\
+$dart\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$nodejs\
+$php\
+$python\
+$ruby\
+$rust\
+$terraform\
+$memory_usage\
+$env_var\
+$cmd_duration\
+$jobs\
+$time\
+$status\
+$character"""
+
+[charater]
+success_symbol = "[➜](bold green)"
+
+[package]
+disabled = true

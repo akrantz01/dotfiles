@@ -1,0 +1,13 @@
+# No recursion
+.cfg
+
+# Credentials
+.aws/credentials
+.git-credentials
+.gnupg/*
+
+# Command histories
+*history
+
+# Explicitly allowed
+!.gnupg/gpg.conf

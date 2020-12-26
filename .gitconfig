@@ -15,9 +15,5 @@
 	ignoreSubmodules = dirty
 [core]
 	quotepath = false
-[url "git@github.com:"]
-	insteadOf = https://github.com/
-[url "git@bitbucket.org:"]
-	insteadOf = https://bitbucket.org/
 [url "git@code.krantz.dev:"]
 	insteadOf = https://code.krantz.dev/

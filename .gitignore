@@ -8,6 +8,7 @@
 
 # Command histories
 *history
+.ssh/known_hosts
 
 # Explicitly allowed
 !.gnupg/gpg.conf

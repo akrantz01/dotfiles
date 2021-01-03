@@ -36,6 +36,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Dotfiles management
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
+# Replace ls with exa
+alias ls='exa --long --all --git --grid --binary'
+
 # Rust
 source $HOME/.cargo/env
 

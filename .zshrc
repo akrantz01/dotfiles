@@ -49,3 +49,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # Go + Yarn + Pipx
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:$HOME/.local/bin
+
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"

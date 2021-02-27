@@ -43,12 +43,11 @@ alias ls='exa --long --all --git --binary'
 source $HOME/.cargo/env
 
 # NodeJS
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Loads from profile.d to allow non-login shells access
+source "/etc/profile.d/nvm.sh"
 
-# Go + Yarn + Pipx
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:$HOME/.local/bin
+# Go + Yarn + Pipx + rbenv
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:$HOME/.local/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin
 
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"
@@ -56,3 +55,6 @@ export PATH="$HOME/.serverless/bin:$PATH"
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+
+# Enable rbenv
+eval "$(rbenv init -)"

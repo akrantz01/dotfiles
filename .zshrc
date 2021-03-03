@@ -58,3 +58,7 @@ export PATH="$HOME/.serverless/bin:$PATH"
 
 # Enable rbenv
 eval "$(rbenv init -)"
+
+export WASMTIME_HOME="$HOME/.wasmtime"
+
+export PATH="$WASMTIME_HOME/bin:$PATH"

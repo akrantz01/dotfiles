@@ -46,8 +46,8 @@ source $HOME/.cargo/env
 # Loads from profile.d to allow non-login shells access
 source "/etc/profile.d/nvm.sh"
 
-# Go + Yarn + Pipx + rbenv
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:$HOME/.local/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin
+# Go + Yarn + Pipx + rbenv + Poetry
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:$HOME/.local/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$HOME/.poetry/bin
 
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"
@@ -59,6 +59,6 @@ export PATH="$HOME/.serverless/bin:$PATH"
 # Enable rbenv
 eval "$(rbenv init -)"
 
+# Add wasmtime
 export WASMTIME_HOME="$HOME/.wasmtime"
-
 export PATH="$WASMTIME_HOME/bin:$PATH"

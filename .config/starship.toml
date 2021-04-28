@@ -31,7 +31,7 @@ $time\
 $status\
 $character"""
 
-[charater]
+[character]
 success_symbol = "[➜](bold green)"
 
 [package]

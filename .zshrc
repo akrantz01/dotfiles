@@ -62,3 +62,6 @@ eval "$(rbenv init -)"
 # Add wasmtime
 export WASMTIME_HOME="$HOME/.wasmtime"
 export PATH="$WASMTIME_HOME/bin:$PATH"
+
+# Use bat instead of cat
+alias cat="bat"

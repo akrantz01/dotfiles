@@ -65,3 +65,9 @@ export PATH="$WASMTIME_HOME/bin:$PATH"
 
 # Use bat instead of cat
 alias cat="bat"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/alex/google-cloud-sdk/path.zsh.inc' ]; then . '/home/alex/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/alex/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/alex/google-cloud-sdk/completion.zsh.inc'; fi

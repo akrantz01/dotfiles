@@ -1,0 +1,595 @@
+#compdef _hashi-up hashi-up
+
+
+function _hashi-up {
+  local -a commands
+
+  _arguments -C \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "boundary:Install or download Boundary"
+      "completion:Generate completion script"
+      "consul:Install or download Consul"
+      "help:Help about any command"
+      "nomad:Install or download Nomad"
+      "packer:Install or download Packer"
+      "terraform:Install or download Terraform"
+      "tls:Builtin helpers for creating certificates"
+      "vagrant:Install or download Vagrant"
+      "vault:Install or download Vault"
+      "version:Prints the hashi-up version"
+      "waypoint:Install or download Waypoint"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  boundary)
+    _hashi-up_boundary
+    ;;
+  completion)
+    _hashi-up_completion
+    ;;
+  consul)
+    _hashi-up_consul
+    ;;
+  help)
+    _hashi-up_help
+    ;;
+  nomad)
+    _hashi-up_nomad
+    ;;
+  packer)
+    _hashi-up_packer
+    ;;
+  terraform)
+    _hashi-up_terraform
+    ;;
+  tls)
+    _hashi-up_tls
+    ;;
+  vagrant)
+    _hashi-up_vagrant
+    ;;
+  vault)
+    _hashi-up_vault
+    ;;
+  version)
+    _hashi-up_version
+    ;;
+  waypoint)
+    _hashi-up_waypoint
+    ;;
+  esac
+}
+
+
+function _hashi-up_boundary {
+  local -a commands
+
+  _arguments -C \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "get:Download Boundary on your local machine"
+      "init-database:"
+      "install:Install Boundary on a server via SSH"
+      "uninstall:Uninstall Boundary on a server via SSH"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  get)
+    _hashi-up_boundary_get
+    ;;
+  init-database)
+    _hashi-up_boundary_init-database
+    ;;
+  install)
+    _hashi-up_boundary_install
+    ;;
+  uninstall)
+    _hashi-up_boundary_uninstall
+    ;;
+  esac
+}
+
+function _hashi-up_boundary_get {
+  _arguments \
+    '(-d --dest)'{-d,--dest}'[Target directory for the downloaded binary]:' \
+    '(-v --version)'{-v,--version}'[Version of Boundary to install]:'
+}
+
+function _hashi-up_boundary_init-database {
+  _arguments \
+    '(-c --config-file)'{-c,--config-file}'[Custom Boundary configuration file to upload]:' \
+    '--db-url[Boundary: configures the URL for connecting to Postgres]:' \
+    '--local[Running the installation locally, without ssh]' \
+    '--package[Upload and use this Boundary package instead of downloading]:' \
+    '--root-key[Boundary: a KEK (Key Encrypting Key) for the scope-specific KEKs (also referred to as the scope'\''s root key).]:' \
+    '(-r --ssh-target-addr)'{-r,--ssh-target-addr}'[Remote SSH target address (e.g. 127.0.0.1:22]:' \
+    '(-k --ssh-target-key)'{-k,--ssh-target-key}'[The ssh key to use for SSH login]:' \
+    '(-p --ssh-target-password)'{-p,--ssh-target-password}'[The ssh password to use for SSH login]:' \
+    '(-s --ssh-target-sudo-pass)'{-s,--ssh-target-sudo-pass}'[The ssh password to use for SSH login]:' \
+    '(-u --ssh-target-user)'{-u,--ssh-target-user}'[Username for SSH login]:' \
+    '(-v --version)'{-v,--version}'[Version of Boundary to install]:'
+}
+
+function _hashi-up_boundary_install {
+  _arguments \
+    '--api-addr[Boundary: address for the API listener]:' \
+    '--api-cert-file[Boundary: specifies the path to the certificate for TLS.]:' \
+    '--api-key-file[Boundary: specifies the path to the private key for the certificate.]:' \
+    '--cluster-addr[Boundary: address for the Cluster listener]:' \
+    '--cluster-cert-file[Boundary: specifies the path to the certificate for TLS.]:' \
+    '--cluster-key-file[Boundary: specifies the path to the private key for the certificate.]:' \
+    '(-c --config-file)'{-c,--config-file}'[Custom Boundary configuration file to upload]:' \
+    '*--controller[Boundary: a list of hosts/IP addresses and optionally ports for reaching controllers.]:' \
+    '--controller-name[Boundary: specifies a unique name of this controller within the Boundary controller cluster.]:' \
+    '--db-url[Boundary: configures the URL for connecting to Postgres]:' \
+    '(*-f *--file)'{\*-f,\*--file}'[Additional files, e.g. certificates, to upload]:' \
+    '--local[Running the installation locally, without ssh]' \
+    '--package[Upload and use this Boundary package instead of downloading]:' \
+    '--proxy-addr[Boundary: address for the Proxy listener]:' \
+    '--proxy-cert-file[Boundary: specifies the path to the certificate for TLS.]:' \
+    '--proxy-key-file[Boundary: specifies the path to the private key for the certificate.]:' \
+    '--public-addr[Boundary: specifies the public host or IP address (and optionally port) at which the worker can be reached by clients for proxying.]:' \
+    '--public-cluster-addr[Boundary: specifies the public host or IP address (and optionally port) at which the controller can be reached by workers.]:' \
+    '--recovery-key[Boundary: KMS key is used for rescue/recovery operations that can be used by a client to authenticate almost any operation within Boundary.]:' \
+    '--root-key[Boundary: a KEK (Key Encrypting Key) for the scope-specific KEKs (also referred to as the scope'\''s root key).]:' \
+    '--skip-enable[If set to true will not enable or start Boundary service]' \
+    '--skip-start[If set to true will not start Boundary service]' \
+    '(-r --ssh-target-addr)'{-r,--ssh-target-addr}'[Remote SSH target address (e.g. 127.0.0.1:22]:' \
+    '(-k --ssh-target-key)'{-k,--ssh-target-key}'[The ssh key to use for SSH login]:' \
+    '(-p --ssh-target-password)'{-p,--ssh-target-password}'[The ssh password to use for SSH login]:' \
+    '(-s --ssh-target-sudo-pass)'{-s,--ssh-target-sudo-pass}'[The ssh password to use for SSH login]:' \
+    '(-u --ssh-target-user)'{-u,--ssh-target-user}'[Username for SSH login]:' \
+    '(-v --version)'{-v,--version}'[Version of Boundary to install]:' \
+    '--worker-auth-key[Boundary: KMS key shared by the Controller and Worker in order to authenticate a Worker to the Controller.]:' \
+    '--worker-name[Boundary: specifies a unique name of this worker within the Boundary worker cluster.]:'
+}
+
+function _hashi-up_boundary_uninstall {
+  _arguments \
+    '--local[Running the installation locally, without ssh]' \
+    '(-r --ssh-target-addr)'{-r,--ssh-target-addr}'[Remote SSH target address (e.g. 127.0.0.1:22]:' \
+    '(-k --ssh-target-key)'{-k,--ssh-target-key}'[The ssh key to use for SSH login]:' \
+    '(-p --ssh-target-password)'{-p,--ssh-target-password}'[The ssh password to use for SSH login]:' \
+    '(-s --ssh-target-sudo-pass)'{-s,--ssh-target-sudo-pass}'[The ssh password to use for SSH login]:' \
+    '(-u --ssh-target-user)'{-u,--ssh-target-user}'[Username for SSH login]:'
+}
+
+function _hashi-up_completion {
+  _arguments \
+    '(-h --help)'{-h,--help}'[help for completion]' \
+    '1: :("bash" "zsh" "fish" "powershell")'
+}
+
+
+function _hashi-up_consul {
+  local -a commands
+
+  _arguments -C \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "get:Download Consul on your local machine"
+      "install:Install Consul on a server via SSH"
+      "uninstall:Uninstall Consul on a server via SSH"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  get)
+    _hashi-up_consul_get
+    ;;
+  install)
+    _hashi-up_consul_install
+    ;;
+  uninstall)
+    _hashi-up_consul_uninstall
+    ;;
+  esac
+}
+
+function _hashi-up_consul_get {
+  _arguments \
+    '(-d --dest)'{-d,--dest}'[Target directory for the downloaded binary]:' \
+    '(-v --version)'{-v,--version}'[Version of Consul to install]:'
+}
+
+function _hashi-up_consul_install {
+  _arguments \
+    '--acl[Consul: enables Consul ACL system. (see Consul documentation for more info)]' \
+    '--advertise-addr[Consul: sets the advertise address to use. (see Consul documentation for more info)]:' \
+    '--agent-token[Consul: the token that the agent will use for internal agent operations.. (see Consul documentation for more info)]:' \
+    '--auto-encrypt[Consul: this option enables auto_encrypt and allows servers to automatically distribute certificates from the Connect CA to the clients. (see Consul documentation for more info)]' \
+    '--bind-addr[Consul: sets the bind address for cluster communication. (see Consul documentation for more info)]:' \
+    '--bootstrap-expect[Consul: sets server to expect bootstrap mode. 0 are less disables bootstrap mode. (see Consul documentation for more info)]:' \
+    '--ca-file[Consul: the certificate authority used to check the authenticity of client and server connections. (see Consul documentation for more info)]:' \
+    '--cert-file[Consul: the certificate to verify the agent'\''s authenticity. (see Consul documentation for more info)]:' \
+    '--client-addr[Consul: sets the address to bind for client access. (see Consul documentation for more info)]:' \
+    '(-c --config-file)'{-c,--config-file}'[Custom Consul configuration file to upload, setting this will disable config file generation meaning the other flags are ignored]:' \
+    '--connect[Consul: enables the Connect feature on the agent. (see Consul documentation for more info)]' \
+    '--datacenter[Consul: specifies the data center of the local agent. (see Consul documentation for more info)]:' \
+    '--dns-addr[Consul: sets the address for the DNS server. (see Consul documentation for more info)]:' \
+    '--encrypt[Consul: provides the gossip encryption key. (see Consul documentation for more info)]:' \
+    '(*-f *--file)'{\*-f,\*--file}'[Additional files, e.g. certificates, to upload]:' \
+    '--grpc-addr[Consul: sets the address for the gRPC API server. (see Consul documentation for more info)]:' \
+    '--http-addr[Consul: sets the address for the HTTP API server. (see Consul documentation for more info)]:' \
+    '--https-addr[Consul: sets the address for the HTTPS API server. (see Consul documentation for more info)]:' \
+    '--https-only[Consul: if true, HTTP port is disabled on both clients and servers and to only accept HTTPS connections when TLS enabled.]' \
+    '--key-file[Consul: the key used with the certificate to verify the agent'\''s authenticity. (see Consul documentation for more info)]:' \
+    '--local[Running the installation locally, without ssh]' \
+    '--package[Upload and use this Consul package instead of downloading]:' \
+    '*--retry-join[Consul: address of an agent to join at start time with retries enabled. Can be specified multiple times. (see Consul documentation for more info)]:' \
+    '--server[Consul: switches agent to server mode. (see Consul documentation for more info)]' \
+    '--skip-enable[If set to true will not enable or start Consul service]' \
+    '--skip-start[If set to true will not start Consul service]' \
+    '(-r --ssh-target-addr)'{-r,--ssh-target-addr}'[Remote SSH target address (e.g. 127.0.0.1:22]:' \
+    '(-k --ssh-target-key)'{-k,--ssh-target-key}'[The ssh key to use for SSH login]:' \
+    '(-p --ssh-target-password)'{-p,--ssh-target-password}'[The ssh password to use for SSH login]:' \
+    '(-s --ssh-target-sudo-pass)'{-s,--ssh-target-sudo-pass}'[The ssh password to use for SSH login]:' \
+    '(-u --ssh-target-user)'{-u,--ssh-target-user}'[Username for SSH login]:' \
+    '(-v --version)'{-v,--version}'[Version of Consul to install]:'
+}
+
+function _hashi-up_consul_uninstall {
+  _arguments \
+    '--local[Running the installation locally, without ssh]' \
+    '(-r --ssh-target-addr)'{-r,--ssh-target-addr}'[Remote SSH target address (e.g. 127.0.0.1:22]:' \
+    '(-k --ssh-target-key)'{-k,--ssh-target-key}'[The ssh key to use for SSH login]:' \
+    '(-p --ssh-target-password)'{-p,--ssh-target-password}'[The ssh password to use for SSH login]:' \
+    '(-s --ssh-target-sudo-pass)'{-s,--ssh-target-sudo-pass}'[The ssh password to use for SSH login]:' \
+    '(-u --ssh-target-user)'{-u,--ssh-target-user}'[Username for SSH login]:'
+}
+
+function _hashi-up_help {
+  _arguments
+}
+
+
+function _hashi-up_nomad {
+  local -a commands
+
+  _arguments -C \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "get:Download Nomad on your local machine"
+      "install:Install Nomad on a server via SSH"
+      "uninstall:Uninstall Nomad on a server via SSH"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  get)
+    _hashi-up_nomad_get
+    ;;
+  install)
+    _hashi-up_nomad_install
+    ;;
+  uninstall)
+    _hashi-up_nomad_uninstall
+    ;;
+  esac
+}
+
+function _hashi-up_nomad_get {
+  _arguments \
+    '(-d --dest)'{-d,--dest}'[Target directory for the downloaded binary]:' \
+    '(-v --version)'{-v,--version}'[Version of Nomad to install]:'
+}
+
+function _hashi-up_nomad_install {
+  _arguments \
+    '--acl[Nomad: enables Nomad ACL system. (see Nomad documentation for more info)]' \
+    '--address[Nomad: the address the agent will bind to for all of its various network services. (see Nomad documentation for more info)]:' \
+    '--advertise[Nomad: the address the agent will advertise to for all of its various network services. (see Nomad documentation for more info)]:' \
+    '--bootstrap-expect[Nomad: sets server to expect bootstrap mode. 0 are less disables bootstrap mode. (see Nomad documentation for more info)]:' \
+    '--ca-file[Nomad: the certificate authority used to check the authenticity of client and server connections. (see Nomad documentation for more info)]:' \
+    '--cert-file[Nomad: the certificate to verify the agent'\''s authenticity. (see Nomad documentation for more info)]:' \
+    '--client[Nomad: enables the client mode of the agent. (see Nomad documentation for more info)]' \
+    '(-c --config-file)'{-c,--config-file}'[Custom Nomad configuration file to upload, setting this will disable config file generation meaning the other flags are ignored]:' \
+    '--datacenter[Nomad: specifies the data center of the local agent. (see Nomad documentation for more info)]:' \
+    '--encrypt[Nomad: Provides the gossip encryption key. (see Nomad documentation for more info)]:' \
+    '(*-f *--file)'{\*-f,\*--file}'[Additional files, e.g. certificates, to upload]:' \
+    '--key-file[Nomad: the key used with the certificate to verify the agent'\''s authenticity. (see Nomad documentation for more info)]:' \
+    '--local[Running the installation locally, without ssh]' \
+    '--node-class[Nomad: specifies an arbitrary string used to logically group client nodes by user-defined class. (see Nomad documentation for more info)]:' \
+    '--package[Upload and use this Nomad package instead of downloading]:' \
+    '*--retry-join[Nomad: address of an agent to join at start time with retries enabled. Can be specified multiple times. (see Nomad documentation for more info)]:' \
+    '--server[Nomad: enables the server mode of the agent. (see Nomad documentation for more info)]' \
+    '--skip-enable[If set to true will not enable or start Nomad service]' \
+    '--skip-start[If set to true will not start Nomad service]' \
+    '(-r --ssh-target-addr)'{-r,--ssh-target-addr}'[Remote SSH target address (e.g. 127.0.0.1:22]:' \
+    '(-k --ssh-target-key)'{-k,--ssh-target-key}'[The ssh key to use for SSH login]:' \
+    '(-p --ssh-target-password)'{-p,--ssh-target-password}'[The ssh password to use for SSH login]:' \
+    '(-s --ssh-target-sudo-pass)'{-s,--ssh-target-sudo-pass}'[The ssh password to use for SSH login]:' \
+    '(-u --ssh-target-user)'{-u,--ssh-target-user}'[Username for SSH login]:' \
+    '(-v --version)'{-v,--version}'[Version of Nomad to install]:'
+}
+
+function _hashi-up_nomad_uninstall {
+  _arguments \
+    '--local[Running the installation locally, without ssh]' \
+    '(-r --ssh-target-addr)'{-r,--ssh-target-addr}'[Remote SSH target address (e.g. 127.0.0.1:22]:' \
+    '(-k --ssh-target-key)'{-k,--ssh-target-key}'[The ssh key to use for SSH login]:' \
+    '(-p --ssh-target-password)'{-p,--ssh-target-password}'[The ssh password to use for SSH login]:' \
+    '(-s --ssh-target-sudo-pass)'{-s,--ssh-target-sudo-pass}'[The ssh password to use for SSH login]:' \
+    '(-u --ssh-target-user)'{-u,--ssh-target-user}'[Username for SSH login]:'
+}
+
+
+function _hashi-up_packer {
+  local -a commands
+
+  _arguments -C \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "get:Download Packer on your local machine"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  get)
+    _hashi-up_packer_get
+    ;;
+  esac
+}
+
+function _hashi-up_packer_get {
+  _arguments \
+    '(-d --dest)'{-d,--dest}'[Target directory for the downloaded binary]:' \
+    '(-v --version)'{-v,--version}'[Version of Packer to install]:'
+}
+
+
+function _hashi-up_terraform {
+  local -a commands
+
+  _arguments -C \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "get:Download Terraform on your local machine"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  get)
+    _hashi-up_terraform_get
+    ;;
+  esac
+}
+
+function _hashi-up_terraform_get {
+  _arguments \
+    '(-d --dest)'{-d,--dest}'[Target directory for the downloaded binary]:' \
+    '(-v --version)'{-v,--version}'[Version of Terraform to install]:'
+}
+
+
+function _hashi-up_tls {
+  local -a commands
+
+  _arguments -C \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "cert:"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  cert)
+    _hashi-up_tls_cert
+    ;;
+  esac
+}
+
+
+function _hashi-up_tls_cert {
+  local -a commands
+
+  _arguments -C \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "create:"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  create)
+    _hashi-up_tls_cert_create
+    ;;
+  esac
+}
+
+function _hashi-up_tls_cert_create {
+  _arguments \
+    '*--host[Hostnames and IPs to generate a certificate for]:'
+}
+
+
+function _hashi-up_vagrant {
+  local -a commands
+
+  _arguments -C \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "get:Download Vagrant on your local machine"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  get)
+    _hashi-up_vagrant_get
+    ;;
+  esac
+}
+
+function _hashi-up_vagrant_get {
+  _arguments \
+    '(-d --dest)'{-d,--dest}'[Target directory for the downloaded binary]:' \
+    '(-v --version)'{-v,--version}'[Version of Vagrant to install]:'
+}
+
+
+function _hashi-up_vault {
+  local -a commands
+
+  _arguments -C \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "get:Download Vault on your local machine"
+      "install:Install Vault on a server via SSH"
+      "uninstall:Uninstall Vault on a server via SSH"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  get)
+    _hashi-up_vault_get
+    ;;
+  install)
+    _hashi-up_vault_install
+    ;;
+  uninstall)
+    _hashi-up_vault_uninstall
+    ;;
+  esac
+}
+
+function _hashi-up_vault_get {
+  _arguments \
+    '(-d --dest)'{-d,--dest}'[Target directory for the downloaded binary]:' \
+    '(-v --version)'{-v,--version}'[Version of Vault to install]:'
+}
+
+function _hashi-up_vault_install {
+  _arguments \
+    '*--address[Vault: the address to bind to for listening. (see Vault documentation for more info)]:' \
+    '--api-addr[Vault: the address (full URL) to advertise to other Vault servers in the cluster for client redirection. (see Vault documentation for more info)]:' \
+    '--cert-file[Vault: the certificate for TLS. (see Vault documentation for more info)]:' \
+    '--cluster-addr[Vault: the address to advertise to other Vault servers in the cluster for request forwarding. (see Vault documentation for more info)]:' \
+    '(-c --config-file)'{-c,--config-file}'[Custom Vault configuration file to upload, setting this will disable config file generation meaning the other flags are ignored]:' \
+    '--consul-addr[Vault: the address of the Consul agent to communicate with. (see Vault documentation for more info)]:' \
+    '--consul-path[Vault: the path in Consul'\''s key-value store where Vault data will be stored. (see Vault documentation for more info)]:' \
+    '--consul-tls-ca-file[Vault: the path to the CA certificate used for Consul communication. (see Vault documentation for more info)]:' \
+    '--consul-tls-cert-file[Vault: the path to the certificate for Consul communication. (see Vault documentation for more info)]:' \
+    '--consul-tls-key-file[Vault: the path to the private key for Consul communication. (see Vault documentation for more info)]:' \
+    '--consul-token[Vault: the Consul ACL token with permission to read and write from the path in Consul'\''s key-value store. (see Vault documentation for more info)]:' \
+    '(*-f *--file)'{\*-f,\*--file}'[Additional files, e.g. certificates, to upload]:' \
+    '--key-file[Vault: the private key for the certificate. (see Vault documentation for more info)]:' \
+    '--local[Running the installation locally, without ssh]' \
+    '--package[Upload and use this Vault package instead of downloading]:' \
+    '--skip-enable[If set to true will not enable or start Vault service]' \
+    '--skip-start[If set to true will not start Vault service]' \
+    '(-r --ssh-target-addr)'{-r,--ssh-target-addr}'[Remote SSH target address (e.g. 127.0.0.1:22]:' \
+    '(-k --ssh-target-key)'{-k,--ssh-target-key}'[The ssh key to use for SSH login]:' \
+    '(-p --ssh-target-password)'{-p,--ssh-target-password}'[The ssh password to use for SSH login]:' \
+    '(-s --ssh-target-sudo-pass)'{-s,--ssh-target-sudo-pass}'[The ssh password to use for SSH login]:' \
+    '(-u --ssh-target-user)'{-u,--ssh-target-user}'[Username for SSH login]:' \
+    '--storage[Vault: the type of storage backend. Currently only "file" of "consul" is supported. (see Vault documentation for more info)]:' \
+    '(-v --version)'{-v,--version}'[Version of Vault to install]:'
+}
+
+function _hashi-up_vault_uninstall {
+  _arguments \
+    '--local[Running the installation locally, without ssh]' \
+    '(-r --ssh-target-addr)'{-r,--ssh-target-addr}'[Remote SSH target address (e.g. 127.0.0.1:22]:' \
+    '(-k --ssh-target-key)'{-k,--ssh-target-key}'[The ssh key to use for SSH login]:' \
+    '(-p --ssh-target-password)'{-p,--ssh-target-password}'[The ssh password to use for SSH login]:' \
+    '(-s --ssh-target-sudo-pass)'{-s,--ssh-target-sudo-pass}'[The ssh password to use for SSH login]:' \
+    '(-u --ssh-target-user)'{-u,--ssh-target-user}'[Username for SSH login]:'
+}
+
+function _hashi-up_version {
+  _arguments
+}
+
+
+function _hashi-up_waypoint {
+  local -a commands
+
+  _arguments -C \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "get:Download Waypoint on your local machine"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  get)
+    _hashi-up_waypoint_get
+    ;;
+  esac
+}
+
+function _hashi-up_waypoint_get {
+  _arguments \
+    '(-d --dest)'{-d,--dest}'[Target directory for the downloaded binary]:' \
+    '(-v --version)'{-v,--version}'[Version of Waypoint to install]:'
+}
+

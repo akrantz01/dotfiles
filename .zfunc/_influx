@@ -1,0 +1,1876 @@
+#compdef _influx influx
+
+
+function _influx {
+  local -a commands
+
+  _arguments -C \
+    '(-h --help)'{-h,--help}'[Help for the influx command ]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "apply:Apply a template to manage resources"
+      "auth:Authorization management commands"
+      "backup:Backup database"
+      "bucket:Bucket management commands"
+      "completion:Generates completion scripts"
+      "config:Config management commands"
+      "dashboards:List Dashboard(s)."
+      "delete:Delete points from influxDB"
+      "export:Export existing resources as a template"
+      "help:Help about any command"
+      "org:Organization management commands"
+      "ping:Check the InfluxDB /health endpoint"
+      "query:Execute a Flux query"
+      "restore:Restores a backup directory to InfluxDB."
+      "secret:Secret management commands"
+      "setup:Setup instance with initial user, org, bucket"
+      "stacks:List stack(s) and associated templates. Subcommands manage stacks."
+      "task:Task management commands"
+      "telegrafs:List Telegraf configuration(s). Subcommands manage Telegraf configurations."
+      "template:Summarize the provided template"
+      "user:User management commands"
+      "v1:InfluxDB v1 management commands"
+      "version:Print the influx CLI version"
+      "write:Write points to InfluxDB"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  apply)
+    _influx_apply
+    ;;
+  auth)
+    _influx_auth
+    ;;
+  backup)
+    _influx_backup
+    ;;
+  bucket)
+    _influx_bucket
+    ;;
+  completion)
+    _influx_completion
+    ;;
+  config)
+    _influx_config
+    ;;
+  dashboards)
+    _influx_dashboards
+    ;;
+  delete)
+    _influx_delete
+    ;;
+  export)
+    _influx_export
+    ;;
+  help)
+    _influx_help
+    ;;
+  org)
+    _influx_org
+    ;;
+  ping)
+    _influx_ping
+    ;;
+  query)
+    _influx_query
+    ;;
+  restore)
+    _influx_restore
+    ;;
+  secret)
+    _influx_secret
+    ;;
+  setup)
+    _influx_setup
+    ;;
+  stacks)
+    _influx_stacks
+    ;;
+  task)
+    _influx_task
+    ;;
+  telegrafs)
+    _influx_telegrafs
+    ;;
+  template)
+    _influx_template
+    ;;
+  user)
+    _influx_user
+    ;;
+  v1)
+    _influx_v1
+    ;;
+  version)
+    _influx_version
+    ;;
+  write)
+    _influx_write
+    ;;
+  esac
+}
+
+function _influx_apply {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '--disable-color[Disable color in output]' \
+    '--disable-table-borders[Disable table borders]' \
+    '(-e --encoding)'{-e,--encoding}'[Encoding for the input stream. If a file is provided will gather encoding type from file extension. If extension provided will override.]:filename:_files -g "yaml" -g "yml" -g "json" -g "jsonnet"' \
+    '*--env-ref[Environment references to provide alongside the template; format should --env-ref=REF_KEY=REF_VALUE --env-ref=REF_KEY_2=REF_VALUE_2]:' \
+    '(*-f *--file)'{\*-f,\*--file}'[Path to template file; Supports HTTP(S) URLs or file paths.]:filename:_files -g "yaml" -g "yml" -g "json" -g "jsonnet"' \
+    '*--filter[Resources to skip when applying the template. Filter out by ‘kind’ or by ‘resource’]:' \
+    '--force[TTY input, if template will have destructive changes, proceed if set "true"]:' \
+    '(-h --help)'{-h,--help}'[Help for the apply command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '(-q --quiet)'{-q,--quiet}'[Disable output printing]' \
+    '(-R --recurse)'{-R,--recurse}'[Process the directory used in -f, --file recursively. Useful when you want to manage related templates organized within the same directory.]' \
+    '*--secret[Secrets to provide alongside the template; format should --secret=SECRET_KEY=SECRET_VALUE --secret=SECRET_KEY_2=SECRET_VALUE_2]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '--stack-id[Stack ID to associate template application]:' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+
+function _influx_auth {
+  local -a commands
+
+  _arguments -C \
+    '(-h --help)'{-h,--help}'[Help for the auth command ]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "active:Active authorization"
+      "create:Create authorization"
+      "delete:Delete authorization"
+      "inactive:Inactive authorization"
+      "list:List authorizations"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  active)
+    _influx_auth_active
+    ;;
+  create)
+    _influx_auth_create
+    ;;
+  delete)
+    _influx_auth_delete
+    ;;
+  inactive)
+    _influx_auth_inactive
+    ;;
+  list)
+    _influx_auth_list
+    ;;
+  esac
+}
+
+function _influx_auth_active {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the active command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The authorization ID (required)]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_auth_create {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-d --description)'{-d,--description}'[Token description]:' \
+    '(-h --help)'{-h,--help}'[Help for the create command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '*--read-bucket[The bucket id]:' \
+    '--read-buckets[Grants the permission to perform read actions against organization buckets]' \
+    '--read-checks[Grants the permission to read checks]' \
+    '--read-dashboards[Grants the permission to read dashboards]' \
+    '--read-dbrps[Grants the permission to read database retention policy mappings]' \
+    '--read-notificationEndpoints[Grants the permission to read notificationEndpoints]' \
+    '--read-notificationRules[Grants the permission to read notificationRules]' \
+    '--read-orgs[Grants the permission to read organizations]' \
+    '--read-tasks[Grants the permission to read tasks]' \
+    '--read-telegrafs[Grants the permission to read telegraf configs]' \
+    '--read-user[Grants the permission to perform read actions against organization users]' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    '(-u --user)'{-u,--user}'[The user name]:' \
+    '*--write-bucket[The bucket id]:' \
+    '--write-buckets[Grants the permission to perform mutative actions against organization buckets]' \
+    '--write-checks[Grants the permission to create checks]' \
+    '--write-dashboards[Grants the permission to create dashboards]' \
+    '--write-dbrps[Grants the permission to create database retention policy mappings]' \
+    '--write-notificationEndpoints[Grants the permission to create notificationEndpoints]' \
+    '--write-notificationRules[Grants the permission to create notificationRules]' \
+    '--write-orgs[Grants the permission to create organizations]' \
+    '--write-tasks[Grants the permission to create tasks]' \
+    '--write-telegrafs[Grants the permission to create telegraf configs]' \
+    '--write-user[Grants the permission to perform mutative actions against organization users]'
+}
+
+function _influx_auth_delete {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the delete command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The authorization ID (required)]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_auth_inactive {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the inactive command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The authorization ID (required)]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_auth_list {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the list command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The authorization ID]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    '(-u --user)'{-u,--user}'[The user]:' \
+    '--user-id[The user ID]:'
+}
+
+function _influx_backup {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '(-b --bucket)'{-b,--bucket}'[The name of the bucket to backup]:' \
+    '--bucket-id[The ID of the bucket to backup]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the backup command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+
+function _influx_bucket {
+  local -a commands
+
+  _arguments -C \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the bucket command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "create:Create bucket"
+      "delete:Delete bucket"
+      "list:List buckets"
+      "update:Update bucket"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  create)
+    _influx_bucket_create
+    ;;
+  delete)
+    _influx_bucket_delete
+    ;;
+  list)
+    _influx_bucket_list
+    ;;
+  update)
+    _influx_bucket_update
+    ;;
+  esac
+}
+
+function _influx_bucket_create {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-d --description)'{-d,--description}'[Description of bucket that will be created]:' \
+    '(-h --help)'{-h,--help}'[Help for the create command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[New bucket name; Maps to env var $INFLUX_BUCKET_NAME]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '(-r --retention)'{-r,--retention}'[Duration bucket will retain data. 0 is infinite. Default is 0.]:' \
+    '--shard-group-duration[Shard group duration used internally by the storage engine. Not supported by InfluxDB Cloud.]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_bucket_delete {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the delete command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The bucket ID, required if name isn'\''t provided]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[The bucket name, org or org-id will be required by choosing this]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_bucket_list {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the list command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The bucket ID]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[The bucket name; Maps to env var $INFLUX_BUCKET_NAME]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_bucket_update {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-d --description)'{-d,--description}'[New description to set on the bucket]:' \
+    '(-h --help)'{-h,--help}'[Help for the update command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The bucket ID (required)]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[New name to set on the bucket; Maps to env var $INFLUX_BUCKET_NAME]:' \
+    '(-r --retention)'{-r,--retention}'[New retention duration to set on the bucket. 0 is infinite.]:' \
+    '--shard-group-duration[New shard group duration to set on the bucket. 0 will tell the server to pick a value. Not supported by InfluxDB Cloud.]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_completion {
+  _arguments \
+    '(-h --help)'{-h,--help}'[help for completion]' \
+    '1: :("bash" "zsh" "powershell")'
+}
+
+
+function _influx_config {
+  local -a commands
+
+  _arguments -C \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the config command ]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "create:Create config"
+      "ls:List configs"
+      "rm:Delete config"
+      "set:Update config"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  create)
+    _influx_config_create
+    ;;
+  ls)
+    _influx_config_ls
+    ;;
+  rm)
+    _influx_config_rm
+    ;;
+  set)
+    _influx_config_set
+    ;;
+  esac
+}
+
+function _influx_config_create {
+  _arguments \
+    '(-a --active)'{-a,--active}'[Set as active config]' \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '(-n --config-name)'{-n,--config-name}'[The config name (required)]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the create command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '(-u --host-url)'{-u,--host-url}'[The host url (required)]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The optional organization name]:' \
+    '(-t --token)'{-t,--token}'[The token for host (required)]:'
+}
+
+function _influx_config_ls {
+  _arguments \
+    '(-h --help)'{-h,--help}'[Help for the ls command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]'
+}
+
+function _influx_config_rm {
+  _arguments \
+    '(-h --help)'{-h,--help}'[Help for the rm command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]'
+}
+
+function _influx_config_set {
+  _arguments \
+    '(-a --active)'{-a,--active}'[Set as active config]' \
+    '(-n --config-name)'{-n,--config-name}'[The config name (required)]:' \
+    '(-h --help)'{-h,--help}'[Help for the set command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '(-u --host-url)'{-u,--host-url}'[The host url (required)]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The optional organization name]:' \
+    '(-t --token)'{-t,--token}'[The token for host (required)]:'
+}
+
+function _influx_dashboards {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the dashboards command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(*-i *--id)'{\*-i,\*--id}'[Dashboard ID to retrieve.]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_delete {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--bucket[The name of destination bucket; Maps to env var $INFLUX_BUCKET_NAME]:' \
+    '--bucket-id[The ID of the destination bucket; Maps to env var $INFLUX_BUCKET_ID]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the delete command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization that owns the bucket; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization that owns the bucket; Maps to env var $INFLUX_ORG_ID]:' \
+    '(-p --predicate)'{-p,--predicate}'[sql like predicate string, exp '\''tag1="v1" and (tag2=123)'\'']:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '--start[the start time in RFC3339Nano format, exp 2009-01-02T23:00:00Z]:' \
+    '--stop[the stop time in RFC3339Nano format, exp 2009-01-02T23:00:00Z]:' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+
+function _influx_export {
+  local -a commands
+
+  _arguments -C \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--bucket-names[List of bucket names comma separated]:' \
+    '--buckets[List of bucket ids comma separated]:' \
+    '--check-names[List of check names comma separated]:' \
+    '--checks[List of check ids comma separated]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '--dashboard-names[List of dashboard names comma separated]:' \
+    '--dashboards[List of dashboard ids comma separated]:' \
+    '--endpoint-names[List of notification endpoint names comma separated]:' \
+    '--endpoints[List of notification endpoint ids comma separated]:' \
+    '(-f --file)'{-f,--file}'[Output file for created template; defaults to std out if no file provided; the extension of provided file (.yml/.json) will dictate encoding]:' \
+    '(-h --help)'{-h,--help}'[Help for the export command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--label-names[List of label names comma separated]:' \
+    '--labels[List of label ids comma separated]:' \
+    '--resource-type[Resource type provided will be associated with all IDs via stdin.]:' \
+    '--rule-names[List of notification rule names comma separated]:' \
+    '--rules[List of notification rule ids comma separated]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '--stack-id[ID for stack to include in export]:' \
+    '--task-names[List of task names comma separated]:' \
+    '--tasks[List of task ids comma separated]:' \
+    '--telegraf-config-names[List of telegraf config names comma separated]:' \
+    '--telegraf-configs[List of telegraf config ids comma separated]:' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    '--variable-names[List of variable names comma separated]:' \
+    '--variables[List of variable ids comma separated]:' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "all:Export all existing resources for an organization as a template"
+      "stack:Export all existing resources for associated with a stack as a template"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  all)
+    _influx_export_all
+    ;;
+  stack)
+    _influx_export_stack
+    ;;
+  esac
+}
+
+function _influx_export_all {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-f --file)'{-f,--file}'[output file for created template; defaults to std out if no file provided; the extension of provided file (.yml/.json) will dictate encoding]:' \
+    '*--filter[Filter exported resources by labelName or resourceKind (format: --filter=labelName=example)]:' \
+    '(-h --help)'{-h,--help}'[Help for the all command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_export_stack {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-f --file)'{-f,--file}'[output file for created template; defaults to std out if no file provided; the extension of provided file (.yml/.json) will dictate encoding]:' \
+    '(-h --help)'{-h,--help}'[Help for the stack command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_help {
+  _arguments
+}
+
+
+function _influx_org {
+  local -a commands
+
+  _arguments -C \
+    '(-h --help)'{-h,--help}'[Help for the org command ]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "create:Create organization"
+      "delete:Delete organization"
+      "list:List organizations"
+      "members:Organization membership commands"
+      "update:Update organization"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  create)
+    _influx_org_create
+    ;;
+  delete)
+    _influx_org_delete
+    ;;
+  list)
+    _influx_org_list
+    ;;
+  members)
+    _influx_org_members
+    ;;
+  update)
+    _influx_org_update
+    ;;
+  esac
+}
+
+function _influx_org_create {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-d --description)'{-d,--description}'[The description of the organization that will be created]:' \
+    '(-h --help)'{-h,--help}'[Help for the create command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[The name of organization that will be created]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_org_delete {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the delete command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The organization ID; Maps to env var $INFLUX_ORG_ID]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_org_list {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the list command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The organization ID; Maps to env var $INFLUX_ORG_ID]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[The organization name; Maps to env var $INFLUX_ORG]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+
+function _influx_org_members {
+  local -a commands
+
+  _arguments -C \
+    '(-h --help)'{-h,--help}'[Help for the members command ]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "add:Add organization member"
+      "list:List organization members"
+      "remove:Remove organization member"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  add)
+    _influx_org_members_add
+    ;;
+  list)
+    _influx_org_members_list
+    ;;
+  remove)
+    _influx_org_members_remove
+    ;;
+  esac
+}
+
+function _influx_org_members_add {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the add command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The organization ID; Maps to env var $INFLUX_ORG_ID]:' \
+    '(-m --member)'{-m,--member}'[The member ID]:' \
+    '(-n --name)'{-n,--name}'[The organization name; Maps to env var $INFLUX_ORG]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_org_members_list {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the list command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The organization ID; Maps to env var $INFLUX_ORG_ID]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[The organization name; Maps to env var $INFLUX_ORG]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_org_members_remove {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the remove command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The organization ID; Maps to env var $INFLUX_ORG_ID]:' \
+    '(-m --member)'{-m,--member}'[The member ID]:' \
+    '(-n --name)'{-n,--name}'[The organization name; Maps to env var $INFLUX_ORG]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_org_update {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-d --description)'{-d,--description}'[The organization name; Maps to env var $INFLUX_ORG_DESCRIPTION]:' \
+    '(-h --help)'{-h,--help}'[Help for the update command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The organization ID (required); Maps to env var $INFLUX_ORG_ID]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[The organization name; Maps to env var $INFLUX_ORG]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_ping {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the ping command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]'
+}
+
+function _influx_query {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-f --file)'{-f,--file}'[Path to Flux query file]:' \
+    '(-h --help)'{-h,--help}'[Help for the query command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '(*-p *--profilers)'{\*-p,\*--profilers}'[Names of Flux profilers to enable. Profiler information will be appended to query results]:' \
+    '(-r --raw)'{-r,--raw}'[Display raw query results]' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_restore {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '(-b --bucket)'{-b,--bucket}'[The name of the bucket to restore]:' \
+    '--bucket-id[The ID of the bucket to restore]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '--full[Fully restore and replace all data on server]' \
+    '(-h --help)'{-h,--help}'[Help for the restore command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--input[Local backup data path (required)]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--new-bucket[The name of the bucket to restore to]:' \
+    '--new-org[The name of the organization to restore to]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+
+function _influx_secret {
+  local -a commands
+
+  _arguments -C \
+    '(-h --help)'{-h,--help}'[Help for the secret command ]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "delete:Delete secret"
+      "list:List secrets"
+      "update:Update secret"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  delete)
+    _influx_secret_delete
+    ;;
+  list)
+    _influx_secret_list
+    ;;
+  update)
+    _influx_secret_update
+    ;;
+  esac
+}
+
+function _influx_secret_delete {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the delete command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-k --key)'{-k,--key}'[The secret key (required)]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_secret_list {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the list command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_secret_update {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the update command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-k --key)'{-k,--key}'[The secret key (required)]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    '(-v --value)'{-v,--value}'[Optional secret value for scripting convenience, using this might expose the secret to your local history]:'
+}
+
+
+function _influx_setup {
+  local -a commands
+
+  _arguments -C \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '(-b --bucket)'{-b,--bucket}'[primary bucket name]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-f --force)'{-f,--force}'[skip confirmation prompt]' \
+    '(-h --help)'{-h,--help}'[Help for the setup command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[config name, only required if you already have existing configs]:' \
+    '(-o --org)'{-o,--org}'[primary organization name]:' \
+    '(-p --password)'{-p,--password}'[password for username]:' \
+    '(-r --retention)'{-r,--retention}'[Duration bucket will retain data. 0 is infinite. Default is 0.]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[token for username, else auto-generated]:' \
+    '(-u --username)'{-u,--username}'[primary username]:' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "user:Setup instance with user, org, bucket"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  user)
+    _influx_setup_user
+    ;;
+  esac
+}
+
+function _influx_setup_user {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '(-b --bucket)'{-b,--bucket}'[primary bucket name]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-f --force)'{-f,--force}'[skip confirmation prompt]' \
+    '(-h --help)'{-h,--help}'[Help for the user command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[config name, only required if you already have existing configs]:' \
+    '(-o --org)'{-o,--org}'[primary organization name]:' \
+    '(-p --password)'{-p,--password}'[password for username]:' \
+    '(-r --retention)'{-r,--retention}'[Duration bucket will retain data. 0 is infinite. Default is 0.]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[token for username, else auto-generated]:' \
+    '(-u --username)'{-u,--username}'[primary username]:'
+}
+
+
+function _influx_stacks {
+  local -a commands
+
+  _arguments -C \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the stacks command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '*--stack-id[Stack ID to filter by]:' \
+    '*--stack-name[Stack name to filter by]:' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "init:Initialize a stack"
+      "rm:Remove a stack(s) and all associated resources"
+      "update:Update a stack"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  init)
+    _influx_stacks_init
+    ;;
+  rm)
+    _influx_stacks_rm
+    ;;
+  update)
+    _influx_stacks_update
+    ;;
+  esac
+}
+
+function _influx_stacks_init {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the init command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-d --stack-description)'{-d,--stack-description}'[Description given to created stack]:' \
+    '(-n --stack-name)'{-n,--stack-name}'[Name given to created stack]:' \
+    '(*-u *--template-url)'{\*-u,\*--template-url}'[Template urls to associate with new stack]:' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_stacks_rm {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '--force[Remove stack without confirmation prompt]' \
+    '(-h --help)'{-h,--help}'[Help for the rm command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '*--stack-id[Stack IDs to be removed]:' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_stacks_update {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '*--addResource[Additional resources to associate with stack]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-f --export-file)'{-f,--export-file}'[Destination for exported template]:' \
+    '(-h --help)'{-h,--help}'[Help for the update command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-d --stack-description)'{-d,--stack-description}'[Description for stack]:' \
+    '(-i --stack-id)'{-i,--stack-id}'[ID of stack]:' \
+    '(-n --stack-name)'{-n,--stack-name}'[Name for stack]:' \
+    '(*-u *--template-url)'{\*-u,\*--template-url}'[Template urls to associate with stack]:' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+
+function _influx_task {
+  local -a commands
+
+  _arguments -C \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the task command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "create:Create task"
+      "delete:Delete task"
+      "list:List tasks"
+      "log:Log related commands"
+      "retry-failed:Retry failed runs"
+      "run:List runs for a task"
+      "update:Update task"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  create)
+    _influx_task_create
+    ;;
+  delete)
+    _influx_task_delete
+    ;;
+  list)
+    _influx_task_list
+    ;;
+  log)
+    _influx_task_log
+    ;;
+  retry-failed)
+    _influx_task_retry-failed
+    ;;
+  run)
+    _influx_task_run
+    ;;
+  update)
+    _influx_task_update
+    ;;
+  esac
+}
+
+function _influx_task_create {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-f --file)'{-f,--file}'[Path to Flux script file]:' \
+    '(-h --help)'{-h,--help}'[Help for the create command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_task_delete {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the delete command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[task id (required)]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_task_list {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '--headers[To print the table headers; defaults true]' \
+    '(-h --help)'{-h,--help}'[Help for the list command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[task ID]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--limit[the number of tasks to find]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    '(-n --user-id)'{-n,--user-id}'[task owner ID]:'
+}
+
+
+function _influx_task_log {
+  local -a commands
+
+  _arguments -C \
+    '(-h --help)'{-h,--help}'[Help for the log command ]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "list:List logs for task"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  list)
+    _influx_task_log_list
+    ;;
+  esac
+}
+
+function _influx_task_log_list {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the list command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--run-id[run id]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '--task-id[task id (required)]:' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_task_retry-failed {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--after[runs after this time]:' \
+    '--before[runs before this time]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '--dry-run[print info about runs that would be retried]' \
+    '(-h --help)'{-h,--help}'[Help for the retry-failed command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[task ID]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--run-limit[max number of failed runs to retry per task]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '--task-limit[max number of tasks to retry failed runs for]:' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+
+function _influx_task_run {
+  local -a commands
+
+  _arguments -C \
+    '(-h --help)'{-h,--help}'[Help for the run command ]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "list:List runs for a task"
+      "retry:retry a run"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  list)
+    _influx_task_run_list
+    ;;
+  retry)
+    _influx_task_run_retry
+    ;;
+  esac
+}
+
+function _influx_task_run_list {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--after[after time for filtering]:' \
+    '--before[before time for filtering]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the list command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--limit[limit the results; default is 100]:' \
+    '--run-id[run id]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '--task-id[task id (required)]:' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_task_run_retry {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the retry command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-r --run-id)'{-r,--run-id}'[run id (required)]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-i --task-id)'{-i,--task-id}'[task id (required)]:' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_task_update {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-f --file)'{-f,--file}'[Path to Flux script file]:' \
+    '(-h --help)'{-h,--help}'[Help for the update command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[task ID (required)]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '--status[update task status]:' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+
+function _influx_telegrafs {
+  local -a commands
+
+  _arguments -C \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the telegrafs command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[Telegraf configuration ID to retrieve.]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "create:Create a Telegraf configuration"
+      "rm:Remove Telegraf configuration(s)"
+      "update:Update a Telegraf configuration"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  create)
+    _influx_telegrafs_create
+    ;;
+  rm)
+    _influx_telegrafs_rm
+    ;;
+  update)
+    _influx_telegrafs_update
+    ;;
+  esac
+}
+
+function _influx_telegrafs_create {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-d --description)'{-d,--description}'[Description for Telegraf configuration]:' \
+    '(-f --file)'{-f,--file}'[Path to Telegraf configuration]:' \
+    '(-h --help)'{-h,--help}'[Help for the create command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[Name of Telegraf configuration]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_telegrafs_rm {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the rm command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(*-i *--id)'{\*-i,\*--id}'[Telegraf configuration ID(s) to remove.]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_telegrafs_update {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-d --description)'{-d,--description}'[Description for Telegraf configuration]:' \
+    '(-f --file)'{-f,--file}'[Path to Telegraf configuration]:' \
+    '(-h --help)'{-h,--help}'[Help for the update command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[Telegraf configuration id to update]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[Name of Telegraf configuration]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+
+function _influx_template {
+  local -a commands
+
+  _arguments -C \
+    '--disable-color[Disable color in output]' \
+    '--disable-table-borders[Disable table borders]' \
+    '(-e --encoding)'{-e,--encoding}'[Encoding for the input stream. If a file is provided will gather encoding type from file extension. If extension provided will override.]:filename:_files -g "yaml" -g "yml" -g "json" -g "jsonnet"' \
+    '(*-f *--file)'{\*-f,\*--file}'[Path to template file; Supports HTTP(S) URLs or file paths.]:filename:_files -g "yaml" -g "yml" -g "json" -g "jsonnet"' \
+    '(-h --help)'{-h,--help}'[Help for the template command ]' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-R --recurse)'{-R,--recurse}'[Process the directory used in -f, --file recursively. Useful when you want to manage related templates organized within the same directory.]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "validate:Validate the provided template"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  validate)
+    _influx_template_validate
+    ;;
+  esac
+}
+
+function _influx_template_validate {
+  _arguments \
+    '(-e --encoding)'{-e,--encoding}'[Encoding for the input stream. If a file is provided will gather encoding type from file extension. If extension provided will override.]:filename:_files -g "yaml" -g "yml" -g "json" -g "jsonnet"' \
+    '(*-f *--file)'{\*-f,\*--file}'[Path to template file; Supports HTTP(S) URLs or file paths.]:filename:_files -g "yaml" -g "yml" -g "json" -g "jsonnet"' \
+    '(-h --help)'{-h,--help}'[Help for the validate command ]' \
+    '(-R --recurse)'{-R,--recurse}'[Process the directory used in -f, --file recursively. Useful when you want to manage related templates organized within the same directory.]'
+}
+
+
+function _influx_user {
+  local -a commands
+
+  _arguments -C \
+    '(-h --help)'{-h,--help}'[Help for the user command ]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "create:Create user"
+      "delete:Delete user"
+      "list:List users"
+      "password:Update user password"
+      "update:Update user"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  create)
+    _influx_user_create
+    ;;
+  delete)
+    _influx_user_delete
+    ;;
+  list)
+    _influx_user_list
+    ;;
+  password)
+    _influx_user_password
+    ;;
+  update)
+    _influx_user_update
+    ;;
+  esac
+}
+
+function _influx_user_create {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the create command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[The user name (required); Maps to env var $INFLUX_NAME]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '(-p --password)'{-p,--password}'[The user password]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_user_delete {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the delete command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The user ID (required)]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_user_list {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the list command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The user ID]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[The user name]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_user_password {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the password command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The user ID]:' \
+    '(-n --name)'{-n,--name}'[The user name]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_user_update {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the update command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '(-i --id)'{-i,--id}'[The user ID (required)]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-n --name)'{-n,--name}'[The user name]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+
+function _influx_v1 {
+  local -a commands
+
+  _arguments -C \
+    '(-h --help)'{-h,--help}'[Help for the v1 command ]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "auth:Authorization management commands for v1 APIs"
+      "dbrp:Commands to manage database and retention policy mappings for v1 APIs"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  auth)
+    _influx_v1_auth
+    ;;
+  dbrp)
+    _influx_v1_dbrp
+    ;;
+  esac
+}
+
+
+function _influx_v1_auth {
+  local -a commands
+
+  _arguments -C \
+    '(-h --help)'{-h,--help}'[Help for the auth command ]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "create:Create authorization"
+      "delete:Delete authorization"
+      "list:List authorizations"
+      "set-active:Change the status of an authorization to active"
+      "set-inactive:Change the status of an authorization to inactive"
+      "set-password:Set a password for an existing authorization"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  create)
+    _influx_v1_auth_create
+    ;;
+  delete)
+    _influx_v1_auth_delete
+    ;;
+  list)
+    _influx_v1_auth_list
+    ;;
+  set-active)
+    _influx_v1_auth_set-active
+    ;;
+  set-inactive)
+    _influx_v1_auth_set-inactive
+    ;;
+  set-password)
+    _influx_v1_auth_set-password
+    ;;
+  esac
+}
+
+function _influx_v1_auth_create {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-d --description)'{-d,--description}'[Token description]:' \
+    '(-h --help)'{-h,--help}'[Help for the create command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--no-password[Don'\''t prompt for a password. You must use v1 auth set-password command before using the token.]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--password[The password to set on this token]:' \
+    '*--read-bucket[The bucket id]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    '--username[The username to identify this token]:' \
+    '*--write-bucket[The bucket id]:'
+}
+
+function _influx_v1_auth_delete {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the delete command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--id[The ID of the authorization; Maps to env var $INFLUX_ID]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    '--username[The username of the authorization; Maps to env var $INFLUX_USERNAME]:'
+}
+
+function _influx_v1_auth_list {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the list command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--id[The ID of the authorization; Maps to env var $INFLUX_ID]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    '(-u --user)'{-u,--user}'[The user]:' \
+    '--user-id[The user ID]:' \
+    '--username[The username of the authorization; Maps to env var $INFLUX_USERNAME]:'
+}
+
+function _influx_v1_auth_set-active {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the set-active command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--id[The ID of the authorization; Maps to env var $INFLUX_ID]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    '--username[The username of the authorization; Maps to env var $INFLUX_USERNAME]:'
+}
+
+function _influx_v1_auth_set-inactive {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the set-inactive command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--id[The ID of the authorization; Maps to env var $INFLUX_ID]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    '--username[The username of the authorization; Maps to env var $INFLUX_USERNAME]:'
+}
+
+function _influx_v1_auth_set-password {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the set-password command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--id[The ID of the authorization; Maps to env var $INFLUX_ID]:' \
+    '--password[Password to set on the authorization]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    '--username[The username of the authorization; Maps to env var $INFLUX_USERNAME]:'
+}
+
+
+function _influx_v1_dbrp {
+  local -a commands
+
+  _arguments -C \
+    '(-h --help)'{-h,--help}'[Help for the dbrp command ]' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "create:Create a database and retention policy mapping to an existing bucket"
+      "delete:Delete a database and retention policy mapping"
+      "list:List database and retention policy mappings"
+      "update:Update a database and retention policy mapping"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  create)
+    _influx_v1_dbrp_create
+    ;;
+  delete)
+    _influx_v1_dbrp_delete
+    ;;
+  list)
+    _influx_v1_dbrp_list
+    ;;
+  update)
+    _influx_v1_dbrp_update
+    ;;
+  esac
+}
+
+function _influx_v1_dbrp_create {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--bucket-id[The ID of the bucket to be mapped]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '--db[The name of the database]:' \
+    '--default[Identify this retention policy as the default for the database]' \
+    '(-h --help)'{-h,--help}'[Help for the create command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--rp[The name of the retention policy]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_v1_dbrp_delete {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the delete command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--id[The ID of the mapping to delete]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_v1_dbrp_list {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--bucket-id[Limit results to the matching bucket id]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '--db[Limit results to the matching database name]:' \
+    '--default[Limit results to default mappings]' \
+    '(-h --help)'{-h,--help}'[Help for the list command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--id[Limit results to a single mapping]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--rp[Limit results to the matching retention policy name]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_v1_dbrp_update {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '--default[Set this mapping'\''s retention policy as the default for the mapping'\''s database]' \
+    '(-h --help)'{-h,--help}'[Help for the update command ]' \
+    '--hide-headers[Hide the table headers; defaults false; Maps to env var $INFLUX_HIDE_HEADERS]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--id[The ID of the mapping to be updated]:' \
+    '--json[Output data as json; defaults false; Maps to env var $INFLUX_OUTPUT_JSON]' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '--rp[The updated name of the retention policy]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:'
+}
+
+function _influx_version {
+  _arguments
+}
+
+
+function _influx_write {
+  local -a commands
+
+  _arguments -C \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '(-b --bucket)'{-b,--bucket}'[The name of destination bucket; Maps to env var $INFLUX_BUCKET_NAME]:' \
+    '--bucket-id[The ID of destination bucket; Maps to env var $INFLUX_BUCKET_ID]:' \
+    '--compression[Input compression, either '\''none'\'' or '\''gzip'\''. Defaults to '\''none'\'' unless an input has a '\''.gz'\'' extension]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '--debug[Log CSV columns to stderr before reading data rows]' \
+    '--encoding[Character encoding of input files or stdin]:' \
+    '--errors-file[The path to the file to write rejected rows to]:' \
+    '(*-f *--file)'{\*-f,\*--file}'[The path to the file to import]:' \
+    '--format[Input format, either lp (Line Protocol) or csv (Comma Separated Values). Defaults to lp unless '\''.csv'\'' extension]:' \
+    '*--header[Header prepends lines to input data; Example --header HEADER1 --header HEADER2]:' \
+    '(-h --help)'{-h,--help}'[Help for the write command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--max-line-length[Specifies the maximum number of bytes that can be read for a single line]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '(-p --precision)'{-p,--precision}'[Precision of the timestamps of the lines; Maps to env var $INFLUX_PRECISION]:' \
+    '--rate-limit[Throttles write, examples: "5 MB / 5 min" , "17kBs". "" (default) disables throttling.]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '--skipHeader[Skip the first <n> rows from input data]' \
+    '--skipRowOnError[Log CSV data errors to stderr and continue with CSV processing]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    '(*-u *--url)'{\*-u,\*--url}'[The URL to import data from]:' \
+    "1: :->cmnds" \
+    "*::arg:->args"
+
+  case $state in
+  cmnds)
+    commands=(
+      "dryrun:Write to stdout instead of InfluxDB"
+    )
+    _describe "command" commands
+    ;;
+  esac
+
+  case "$words[1]" in
+  dryrun)
+    _influx_write_dryrun
+    ;;
+  esac
+}
+
+function _influx_write_dryrun {
+  _arguments \
+    '(-c --active-config)'{-c,--active-config}'[Config name to use for command; Maps to env var $INFLUX_ACTIVE_CONFIG]:' \
+    '--configs-path[Path to the influx CLI configurations; Maps to env var $INFLUX_CONFIGS_PATH]:' \
+    '(-h --help)'{-h,--help}'[Help for the dryrun command ]' \
+    '--host[HTTP address of InfluxDB; Maps to env var $INFLUX_HOST]:' \
+    '--skip-verify[Skip TLS certificate chain and host name verification.]' \
+    '(-t --token)'{-t,--token}'[Authentication token; Maps to env var $INFLUX_TOKEN]:' \
+    '(-b --bucket)'{-b,--bucket}'[The name of destination bucket; Maps to env var $INFLUX_BUCKET_NAME]:' \
+    '--bucket-id[The ID of destination bucket; Maps to env var $INFLUX_BUCKET_ID]:' \
+    '--compression[Input compression, either '\''none'\'' or '\''gzip'\''. Defaults to '\''none'\'' unless an input has a '\''.gz'\'' extension]:' \
+    '--debug[Log CSV columns to stderr before reading data rows]' \
+    '--encoding[Character encoding of input files or stdin]:' \
+    '--errors-file[The path to the file to write rejected rows to]:' \
+    '(*-f *--file)'{\*-f,\*--file}'[The path to the file to import]:' \
+    '--format[Input format, either lp (Line Protocol) or csv (Comma Separated Values). Defaults to lp unless '\''.csv'\'' extension]:' \
+    '*--header[Header prepends lines to input data; Example --header HEADER1 --header HEADER2]:' \
+    '--max-line-length[Specifies the maximum number of bytes that can be read for a single line]:' \
+    '(-o --org)'{-o,--org}'[The name of the organization; Maps to env var $INFLUX_ORG]:' \
+    '--org-id[The ID of the organization; Maps to env var $INFLUX_ORG_ID]:' \
+    '(-p --precision)'{-p,--precision}'[Precision of the timestamps of the lines; Maps to env var $INFLUX_PRECISION]:' \
+    '--rate-limit[Throttles write, examples: "5 MB / 5 min" , "17kBs". "" (default) disables throttling.]:' \
+    '--skipHeader[Skip the first <n> rows from input data]' \
+    '--skipRowOnError[Log CSV data errors to stderr and continue with CSV processing]' \
+    '(*-u *--url)'{\*-u,\*--url}'[The URL to import data from]:'
+}
+
+
+compdef _influx influx

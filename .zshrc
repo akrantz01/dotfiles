@@ -52,10 +52,6 @@ export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:$HOME/.local/bi
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"
 
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
-
 # Enable rbenv
 eval "$(rbenv init -)"
 
@@ -74,3 +70,6 @@ if [ -f '/home/alex/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/alex/g
 
 # Add thefuck alias
 eval $(thefuck --alias)
+
+# Add homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

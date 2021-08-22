@@ -73,3 +73,7 @@ eval $(thefuck --alias)
 
 # Add homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# NeoVim aliases
+alias nv="nvim"
+alias e="nvim"

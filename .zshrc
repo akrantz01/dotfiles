@@ -79,3 +79,8 @@ alias nv="nvim"
 alias e="nvim"
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+# UBC Formula-E development
+export PATH="$PATH:/usr/local/bin/arm-none-eabi-gcc"
+export PATH="$PATH:/usr/local/STM32CubeMX"
+

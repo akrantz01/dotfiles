@@ -84,3 +84,6 @@ export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$PATH:/usr/local/bin/arm-none-eabi-gcc"
 export PATH="$PATH:/usr/local/STM32CubeMX"
 
+# zoxide
+eval "$(zoxide init zsh)"
+

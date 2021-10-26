@@ -87,3 +87,6 @@ export PATH="$PATH:/usr/local/STM32CubeMX"
 # zoxide
 eval "$(zoxide init zsh)"
 
+# Gradle 7
+export PATH="$PATH:/opt/gradle/gradle-7.2/bin"
+

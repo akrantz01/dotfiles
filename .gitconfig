@@ -17,3 +17,5 @@
 	quotepath = false
 [url "git@code.krantz.dev:"]
 	insteadOf = https://code.krantz.dev/
+[init]
+	defaultBranch = main

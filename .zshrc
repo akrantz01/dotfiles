@@ -90,3 +90,6 @@ eval "$(zoxide init zsh)"
 # Gradle 7
 export PATH="$PATH:/opt/gradle/gradle-7.2/bin"
 
+# Haskell
+[ -f "/home/alex/.ghcup/env" ] && source "/home/alex/.ghcup/env" # ghcup-env
+

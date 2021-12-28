@@ -46,8 +46,8 @@ source $HOME/.cargo/env
 # Loads from profile.d to allow non-login shells access
 source "/etc/profile.d/nvm.sh"
 
-# Go + Yarn + Pipx + rbenv + Poetry
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:$HOME/.local/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$HOME/.poetry/bin
+# Go + Yarn + Pipx + rbenv
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.yarn/bin:$HOME/.local/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin
 
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"
@@ -77,8 +77,6 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # NeoVim aliases
 alias nv="nvim"
 alias e="nvim"
-
-export PATH="$HOME/.poetry/bin:$PATH"
 
 # UBC Formula-E development
 export PATH="$PATH:/usr/local/bin/arm-none-eabi-gcc"

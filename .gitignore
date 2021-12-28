@@ -12,3 +12,4 @@
 
 # Explicitly allowed
 !.gnupg/gpg.conf
+!.gnupg/scdaemon.conf

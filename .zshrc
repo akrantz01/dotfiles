@@ -20,6 +20,16 @@ source /etc/profile
 eval "$(dircolors -b)"
 eval "$(starship init zsh)"
 
+# Fix keybindings
+bindkey '\e[1~' beginning-of-line # Linux console
+bindkey '\eOH'  beginning-of-line # xterm
+bindkey '\e[H'  beginning-of-line # gnome-terminal
+bindkey '\e[2~' overwrite-mode
+bindkey '\e[3~' delete-char
+bindkey '\e[4~' end-of-line       # Linux console
+bindkey '\e[F'  end-of-line       # xterm
+bindkey '\eOF'  end-of-line       # gnome-terminal
+
 # Autocompletion
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 

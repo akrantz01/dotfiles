@@ -91,3 +91,5 @@ export PATH="$PATH:/opt/gradle/gradle-7.2/bin"
 # Haskell
 [ -f "/home/alex/.ghcup/env" ] && source "/home/alex/.ghcup/env" # ghcup-env
 
+# Install fzf from git
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -36,6 +36,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Dotfiles management
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
+# Add homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # Replace ls with exa
 alias ls='exa --long --all --git --binary'
 
@@ -70,9 +73,6 @@ if [ -f '/home/alex/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/alex/g
 
 # Add thefuck alias
 eval $(thefuck --alias)
-
-# Add homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # NeoVim aliases
 alias nv="nvim"

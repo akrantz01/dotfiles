@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+echo "Installing ansible..."
+source /etc/os-release
+case $ID in
+  fedora)
+    sudo dnf install ansible ;;
+  debian| ubuntu)
+    sudo apt install ansible ;;
+  *)
+    echo "Unsupported operating system"
+    exit 1
+    ;;
+esac
+
+# Install everything using ansible
+echo "Running ansible playbook..."
+cd $HOME/.setup/
+ansible-playbook --ask-become-pass -i hosts install.yml
+

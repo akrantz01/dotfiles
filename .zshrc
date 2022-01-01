@@ -103,3 +103,6 @@ export PATH="$PATH:/opt/gradle/gradle-7.2/bin"
 
 # Install fzf from git
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Add Pulumi to the PATH
+export PATH=$PATH:$HOME/.pulumi/bin

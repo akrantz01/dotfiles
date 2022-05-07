@@ -19,3 +19,5 @@
 	insteadOf = https://code.krantz.dev/
 [init]
 	defaultBranch = main
+[pull]
+	rebase = true

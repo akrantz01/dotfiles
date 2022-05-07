@@ -106,3 +106,14 @@ export PATH="$PATH:/opt/gradle/gradle-7.2/bin"
 
 # Add Pulumi to the PATH
 export PATH=$PATH:$HOME/.pulumi/bin
+
+# Add Flutter to the path
+export PATH=$PATH:/opt/flutter/bin
+export CHROME_EXECUTABLE=/usr/bin/vivaldi
+
+# WaffleHacks stuff
+export VAULT_ADDR=https://vault.wafflehacks.org
+
+# Fly.io
+export FLYCTL_INSTALL="/home/alex/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"

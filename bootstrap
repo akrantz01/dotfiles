@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+if [ $SPIN ]; then
+	echo "Running in spin, exiting"
+	exit 0;
+fi

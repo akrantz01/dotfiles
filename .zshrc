@@ -117,3 +117,6 @@ export VAULT_ADDR=https://vault.wafflehacks.org
 # Fly.io
 export FLYCTL_INSTALL="/home/alex/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+# NATS
+export PATH="$PATH:/home/alex/.nsccli/bin"

@@ -1,8 +1,0 @@
----
-- name: Setup local environment
-  hosts: local
-  roles: []
-  tasks:
-    - name: ping
-      ansible.builtin.ping: {}
-

@@ -33,24 +33,8 @@ bindkey '\eOF'  end-of-line       # gnome-terminal
 # Autocompletion
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# Enable colors for tools
-alias ls="ls --color=auto -la"
-alias grep="grep --color=auto"
-alias fgrep="fgrep --color=auto"
-alias egrep="egrep --color=auto"
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Dotfiles management
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-
 # Add homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# Replace ls with exa
-alias ls='exa --long --all --git --binary'
 
 # Rust
 source $HOME/.cargo/env
@@ -72,9 +56,6 @@ eval "$(rbenv init -)"
 export WASMTIME_HOME="$HOME/.wasmtime"
 export PATH="$WASMTIME_HOME/bin:$PATH"
 
-# Use bat instead of cat
-alias cat="bat"
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/alex/google-cloud-sdk/path.zsh.inc' ]; then . '/home/alex/google-cloud-sdk/path.zsh.inc'; fi
 
@@ -83,10 +64,6 @@ if [ -f '/home/alex/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/alex/g
 
 # Add thefuck alias
 eval $(thefuck --alias)
-
-# NeoVim aliases
-alias nv="nvim"
-alias e="nvim"
 
 # UBC Formula-E development
 export PATH="$PATH:/usr/local/bin/arm-none-eabi-gcc"
@@ -120,3 +97,30 @@ export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # NATS
 export PATH="$PATH:/home/alex/.nsccli/bin"
+
+# chruby
+source /home/linuxbrew/.linuxbrew/opt/chruby/share/chruby/chruby.sh
+source /home/linuxbrew/.linuxbrew/opt/chruby/share/chruby/auto.sh
+
+# Enable colors for tools
+alias ls="ls --color=auto -la"
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Dotfiles management
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+# Replace ls with exa
+alias ls='exa --long --all --git --binary'
+
+# Use bat instead of cat
+alias cat="bat"
+
+# NeoVim aliases
+alias nv="nvim"
+alias e="nvim"

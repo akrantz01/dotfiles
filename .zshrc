@@ -62,9 +62,6 @@ if [ -f '/home/alex/google-cloud-sdk/path.zsh.inc' ]; then . '/home/alex/google-
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/alex/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/alex/google-cloud-sdk/completion.zsh.inc'; fi
 
-# Add thefuck alias
-eval $(thefuck --alias)
-
 # UBC Formula-E development
 export PATH="$PATH:/usr/local/bin/arm-none-eabi-gcc"
 export PATH="$PATH:/usr/local/STM32CubeMX"

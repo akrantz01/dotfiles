@@ -1,7 +1,7 @@
 [user]
 	name = Alex Krantz
 	email = alex@krantz.dev
-	signingkey = 82E241A05A146B4C
+	signingkey = B846AD084692588B
 [commit]
 	gpgsign = true
 [credential]
